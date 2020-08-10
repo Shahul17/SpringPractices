@@ -3,7 +3,7 @@ package crud.mvcCrud.bean;
 import java.util.List;
 
 public class Customer {
-	@Id
+	
 	int id;
 	int age;
 	String name;

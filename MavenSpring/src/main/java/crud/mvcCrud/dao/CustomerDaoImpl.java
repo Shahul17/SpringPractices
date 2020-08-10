@@ -19,7 +19,23 @@ public class CustomerDaoImpl implements CustomerDao{
 		jdbcTemplate = new JdbcTemplate(datasource);
 	}
 	
+	@Override
+	public List<Customer> getOne() {
+		String strSelect1 = "Select * from customer where id="+id+"";
+		//System.out.println(strSelect1);
+		List<Customer> customerr = jdbcTemplate.query(strSelect1, new RowMapper<Customer>() {
 
+			@Override
+			public Customer mapRow(ResultSet ps, int rowNum) throws SQLException {
+				Customer twoCustomer = new Customer();
+				twoCustomer.setId(ps.getInt(1));
+				twoCustomer.setName(ps.getString(2));
+				twoCustomer.setAge(ps.getInt(3));
+				return twoCustomer;
+			}
+		});
+		return customerr;
+	}
 	@Override
 	public List<Customer> getAll() {
 		String strSelect = "Select * from customer";
@@ -78,22 +94,8 @@ public class CustomerDaoImpl implements CustomerDao{
 	
 		return result;
 	}
-	@Override
-	public List<Customer> getOne() {
-		String strSelect = "Select * from customer where id="+id+"";
-		List<Customer> customerr = jdbcTemplate.query(strSelect, new RowMapper<Customer>() {
-
-			@Override
-			public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Customer oneCustomer = new Customer();
-				oneCustomer.setId(rs.getInt(1));
-				oneCustomer.setName(rs.getString(2));
-				oneCustomer.setAge(rs.getInt(3));
-				return oneCustomer;
-			}
-		});
-		return customerr;
-	}
+	
+	
 
 }
 

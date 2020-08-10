@@ -24,9 +24,9 @@ public class ViewController
 		
 		return modelAndView;
 	}
-	@RequestMapping(value="/singleviewprocess",method=RequestMethod.GET)
+	@RequestMapping(value="/singleviewprocess",method=RequestMethod.POST)
 	public ModelAndView getOnelCustomer() throws IOException{
-		ModelAndView modelAndView =new ModelAndView("singlecustomerviewpage");
+		ModelAndView modelAndView =new ModelAndView("singlecustomerlist");
 		List<Customer> customerr = customerDao.getOne();
 		modelAndView.addObject("customerr",customerr);
 		return modelAndView;
